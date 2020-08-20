@@ -18,12 +18,12 @@ router.use(protect);
 router
   .route('/')
   .get(getAllGreenhouseReviews)
-  .post(restrictTo('user'), setUserGreenhouseIds, createGreenhouseReview); //??the grower can post a review or only the user ??
+  .post(setUserGreenhouseIds, createGreenhouseReview);
 
 router
   .route('/:id')
   .get(getGreenhouseReview)
-  .patch(restrictTo('user', 'admin'), updateGreenhouseReview)
-  .delete(restrictTo('user', 'admin'), deleteGreenhouseReview);
+  .patch(updateGreenhouseReview)
+  .delete(deleteGreenhouseReview);
 
 module.exports = router;

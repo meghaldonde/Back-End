@@ -8,8 +8,17 @@ const {
   deleteProduct,
 } = require('./../controllers/productController');
 
-router.route('/').get(getAllProducts).post(createProduct);
+const { protect, restrictTo } = require('../controllers/authController');
 
-router.route('/:id').get(getProduct).patch(updateProduct).delete(deleteProduct);
+router
+  .route('/')
+  .get(getAllProducts)
+  .post(protect, restrictTo('admin'), createProduct);
+
+router
+  .route('/:id')
+  .get(getProduct)
+  .patch(protect, restrictTo('admin'), updateProduct)
+  .delete(protect, restrictTo('admin'), deleteProduct);
 
 module.exports = router;

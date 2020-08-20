@@ -8,21 +8,18 @@ const {
   deleteArticle,
 } = require('../controllers/articleController');
 
-const { protect, restrictTo } = require('../controllers/authController');
+const { protect } = require('../controllers/authController');
 
 const reviewArticleRouter = require('./reviewArticleRoutes');
 router.use('/:articleId/reviews/', reviewArticleRouter);
 // "{{URL}}/api/v1/articles/:greenhouseId/reviews"
 
-router
-  .route('/')
-  .get(protect, restrictTo('admin'), getAllArticles)
-  .post(protect, restrictTo('admin', 'grower'), createArticle);
+router.route('/').get(getAllArticles).post(protect, createArticle);
 
 router
   .route('/:id')
-  .get(protect, restrictTo('admin'), getArticle)
-  .patch(protect, restrictTo('admin', 'grower'), updateArticle)
-  .delete(protect, restrictTo('admin', 'grower'), deleteArticle);
+  .get(getArticle)
+  .patch(protect, updateArticle)
+  .delete(protect, deleteArticle);
 
 module.exports = router;

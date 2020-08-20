@@ -7,9 +7,14 @@ const {
   updateAnswer,
   deleteAnswer,
 } = require('../controllers/answerController');
+const { protect } = require('../controllers/authController');
 
-router.route('/').get(getAllAnswers).post(createAnswer);
+router.route('/').get(getAllAnswers).post(protect, createAnswer);
 
-router.route('/:id').get(getAnswer).patch(updateAnswer).delete(deleteAnswer);
+router
+  .route('/:id')
+  .get(getAnswer)
+  .patch(protect, updateAnswer)
+  .delete(protect, deleteAnswer);
 
 module.exports = router;

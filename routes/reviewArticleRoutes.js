@@ -18,12 +18,12 @@ router.use(protect);
 router
   .route('/')
   .get(getAllArticleReviews)
-  .post(restrictTo('user'), setUserArticleIds, createArticleReview); //??the grower can post a review or only the user ??
+  .post(setUserArticleIds, createArticleReview);
 
 router
   .route('/:id')
   .get(getArticleReview)
-  .patch(restrictTo('user', 'admin'), updateArticleReview)
-  .delete(restrictTo('user', 'admin'), deleteArticleReview);
+  .patch(updateArticleReview)
+  .delete(deleteArticleReview);
 
 module.exports = router;

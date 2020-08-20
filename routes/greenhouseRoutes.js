@@ -22,6 +22,6 @@ router
 router
   .route('/:id')
   .get(protect, getGreenhouse)
-  .patch(protect, restrictTo('admin', 'grower'), updateGreenhouse)
-  .delete(protect, restrictTo('admin', 'grower'), deleteGreenhouse);
+  .patch(protect, restrictTo('grower'), updateGreenhouse)
+  .delete(protect, restrictTo('grower'), deleteGreenhouse);
 module.exports = router;

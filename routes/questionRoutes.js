@@ -7,13 +7,14 @@ const {
   updateQuestion,
   deleteQuestion,
 } = require('../controllers/questionController');
+const { protect } = require('../controllers/authController');
 
-router.route('/').get(getAllQuestions).post(createQuestion);
+router.route('/').get(getAllQuestions).post(protect, createQuestion);
 
 router
   .route('/:id')
   .get(getQuestion)
-  .patch(updateQuestion)
-  .delete(deleteQuestion);
+  .patch(protect, updateQuestion)
+  .delete(protect, deleteQuestion);
 
 module.exports = router;
