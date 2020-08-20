@@ -39,4 +39,4 @@ EMAIL_PASSWORD=<YOUR_MAILTRAP_EMAIL_Password>
 
 # Api Documentation
 
-//Link of GrowersBrains Api
+-[Growers Brains documentation API](https://documenter.getpostman.com/view/12095324/T1LTfjXD?version=latest)
