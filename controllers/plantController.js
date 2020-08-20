@@ -80,15 +80,24 @@ exports.updatePlant = catchAsync(async (req, res, next) => {
       req.body.images.push(el.filename);
     });
   }
-
+  const plant = await Plant.findOne({
+    $and: [{ _id: req.params.id }, { grower: req.user.id }],
+  });
+  if (!plant) {
+    return next(
+      new AppError(
+        "No plant found with that ID , or you can't update this plant ",
+        404
+      )
+    );
+  }
+  
   const updatedPlant = await Plant.findByIdAndUpdate(
-    { _id: req.params.id },
+    { _id: plant._id},
     req.body,
     { new: true, runValidators: true }
   );
-  if (!updatedPlant) {
-    return next(new AppError('No plant found with that ID ', 404));
-  }
+  
 
   res.status(200).json({
     message: 'success',

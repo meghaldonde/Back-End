@@ -14,6 +14,7 @@ exports.getAllQuestions = catchAsync(async (req, res, next) => {
 });
 
 exports.createQuestion = catchAsync(async (req, res, next) => {
+  req.body.asker = req.user.id;
   const newQuestion = await Question.create(req.body);
   res.status(201).json({
     status: 'success',
@@ -39,14 +40,23 @@ exports.getQuestion = catchAsync(async (req, res, next) => {
 });
 
 exports.updateQuestion = catchAsync(async (req, res, next) => {
+  const question = await Question.findOne({
+    $and: [{ _id: req.params.id }, { asker: req.user.id }],
+  });
+  if (!question) {
+    return next(
+      new AppError(
+        "No question found with that ID , or you can't update this question ",
+        404
+      )
+    );
+  }
+
   const updatedQuestion = await Question.findByIdAndUpdate(
-    { _id: req.params.id },
+    { _id: question._id },
     req.body,
     { new: true, runValidators: true }
   );
-  if (!updatedQuestion) {
-    return next(new AppError('No Question found with that ID ', 404));
-  }
 
   res.status(200).json({
     message: 'success',
@@ -57,10 +67,20 @@ exports.updateQuestion = catchAsync(async (req, res, next) => {
 });
 
 exports.deleteQuestion = catchAsync(async (req, res, next) => {
-  const question = await Question.findByIdAndDelete(req.params.id);
+  const question = await Question.findOne({
+    $and: [{ _id: req.params.id }, { asker: req.user.id }],
+  });
   if (!question) {
-    return next(new AppError('No Question found with that ID ', 404));
+    return next(
+      new AppError(
+        "No question found with that ID , or you can't delete this question ",
+        404
+      )
+    );
   }
+
+  await Question.findByIdAndDelete(req.params.id);
+
   res.status(204).json({
     status: 'success',
     data: null,
