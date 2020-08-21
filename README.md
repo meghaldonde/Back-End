@@ -26,7 +26,8 @@ EMAIL_PASSWORD=<YOUR_MAILTRAP_EMAIL_Password>
 
 # To import/delete development data to/from your database
 
-**To Import Data** Run `npm run import-data`,
+**To Import Data** Run `npm run import-data`
+
 **To Delete Data** Run `npm run delete-data`
 
 # Handy Resources
@@ -37,6 +38,6 @@ EMAIL_PASSWORD=<YOUR_MAILTRAP_EMAIL_Password>
 - [Mongoose documentation](https://mongoosejs.com/docs/guide.html)
 - [Best practices for REST api design](https://stackoverflow.blog/2020/03/02/best-practices-for-rest-api-design/)
 
-# Api Documentation
+# API Documentation
 
--[Growers Brains documentation API](https://documenter.getpostman.com/view/12095324/T1LTfjXD?version=latest)
+- [Growers Brains documentation API](https://documenter.getpostman.com/view/12095324/T1LTfjXD?version=latest)
