@@ -14,7 +14,7 @@ const greenhouseSchema = new mongoose.Schema(
     // ], this will be a virtual field when a grower want to create a plant use /ap1/v1/plants (POST)
     ratingsAverage: {
       type: Number,
-      default: 5,
+      default: 0,
       set: (val) => Math.round(val * 10) / 10,
     },
     ratingsQuantity: {
