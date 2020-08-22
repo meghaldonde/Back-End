@@ -30,6 +30,22 @@ EMAIL_PASSWORD=<YOUR_MAILTRAP_EMAIL_Password>
 
 **To Delete Data** Run `npm run delete-data`
 
+# Structure Overview
+
+```javascript
+.
+├── controllers                 # Request Managers
+├── dev-data                    # Development Database Data
+├── img                         # User Profiles Pictures & Growers Plants
+├── models                      # Database Models
+├── routes                      # Routes Handlers for API Endpoints
+├── utils                       # Utilities & Helpers
+├── app.js                      # Application Middlewares & Routes
+├── LICENSE                     # MIT License
+├── README.md                   # Project Documentation
+└── server.js                   # Server Configuration & Starting Point
+```
+
 # Handy Resources
 
 - [Nodejs documentation](https://nodejs.org/en/docs/)
