@@ -10,7 +10,7 @@ You can create a .env file in your root project folder and add theses configurat
 ```bash
 PORT=5000
 NODE_ENV = development
-MONGO_URI = <YOUR_MONGO_URI> (Only if you use a hosted database)
+MONGO_URI = mongodb://localhost:27017/GrowersBrains (Change it if you use a hosted database or if your local mongo uses a different port)
 
 JWT_SECRET= <JWT_SECRET>
 JWT_EXPIRES_IN=<JWT_EXPIRATION_DATE> (Ex : 90d )
