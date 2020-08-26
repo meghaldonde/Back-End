@@ -2,6 +2,13 @@
 const mongoose = require('mongoose'); // Used for MongoDB
 require('dotenv').config(); // Used for environmental variables
 
+//added for Gridfs image
+const crypto = require("crypto");
+const path = require("path");
+const multer = require("multer");
+const GridFsStorage = require("multer-gridfs-storage");
+//end of Gridfs
+
 //Import Application Middlewares & Routes
 const app = require('./app');
 
@@ -9,7 +16,7 @@ const app = require('./app');
 process.on('uncaughtException', (err) => {
   console.log('UNCAUGHT EXCEPTION! 🤯 Shutting down....');
   console.log(err.name, err.message);
-  process.exit(1);
+  process.exit(1)
 });
 
 //Handle Rejections
@@ -40,5 +47,16 @@ mongoose
 //TODO: Change PORT env variable in .env file. Default port is 5000
 const port = process.env.PORT || 5000;
 const server = app.listen(port, () => {
-  console.log(`Server is running on port ${port}....`);
+
+    console.log(`Server is running on port ${port}....`);
+});
+
+process.on('unhandledRejection', (err) => {
+    console.log('UNHADLED REJECTION! 🤯 Shutting down....');
+    console.log(err.name, err.message);
+    //Here we give the server time to finish all the requests that are still pending
+    //or being handled at the time, and only after that the server is thein basically killed
+    server.close(() => {
+        process.exit(1);
+    });
 });
