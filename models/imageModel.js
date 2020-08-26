@@ -6,7 +6,7 @@ const ImageSchema = new Schema({
         required: true,
         type: String,
     },
-    fileName: {
+    filename: {
         required: true,
         type: String,
     },
